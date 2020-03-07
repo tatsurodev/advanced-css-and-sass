@@ -37,7 +37,47 @@ body {
     background-size: cover;
     /* 基準となる固定する場所を指定 */
     background-position: top;
+    position: relative;
     /* 切り抜く */
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
 
+.logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.logo {
+    height: 35px; 
+}
+
+.text-box {
+    /* 親要素.headerにはrelative設定済 */
+    position: absolute;
+    /* 親要素に対しての% */
+    top: 40%;
+    left: 50%;
+    /* transformで使う%は要素自身に対する% */
+    transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400px;
+    letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    /* .heading-primary-main、..heading-primary-subの文字の幅が一緒になるように設定 */
+    letter-spacing: 17.4px;
 }
