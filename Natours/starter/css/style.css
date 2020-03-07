@@ -6,3 +6,38 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    /* paddingは継承されない */
+    padding: 30px;
+}
+
+.header {
+    /* vw, vhはviewportに対しての% */
+    height: 95vh;
+    /* 背景を複数指定 */
+    background-image:
+        linear-gradient(
+            to right bottom,
+            rgba(126, 213, 111, 0.8),
+            rgba(40,180,131,0.8)
+        ),
+        url(../img/hero.jpg);
+    background-size: cover;
+    /* 基準となる固定する場所を指定 */
+    background-position: top;
+    /* 切り抜く */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+}
