@@ -54,12 +54,15 @@ body {
 
 .text-box {
     /* 親要素.headerにはrelative設定済 */
+    /* block要素の中央揃えは親要素relative、子要素absoluteを使用 */
     position: absolute;
     /* 親要素に対しての% */
     top: 40%;
     left: 50%;
     /* transformで使う%は要素自身に対する% */
     transform: translate(-50%, -50%);
+    /* inline要素の中央揃えにはtext-align: center;を使用 */
+    text-align: center;
 }
 
 .heading-primary {
@@ -67,6 +70,7 @@ body {
     text-transform: uppercase;
     /* .heading-primary-main, .heading-primary-subで使用するanimationによる小さな揺れをなくすためのhack */
     backface-visibility: hidden;
+    margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -119,4 +123,34 @@ body {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    /* 全animationの変遷をゆっくりさせる */
+    transition: all .2s;
+}
+
+.btn:hover {
+    /* hover時にbuttonを浮き上がらせる */
+    transform: translateY(-3px);
+    /* box-shadow: x, epsilon blur rgba; */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    /* clickされた時にhover時より沈ませる */
+    transform: translateY(-1px);
+    /* clickされた時にhover時よりy, blurを小さくすることでclick感が出る */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
 }
