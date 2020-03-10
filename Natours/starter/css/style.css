@@ -93,6 +93,7 @@ body {
     /* .heading-primary-main、..heading-primary-subの文字の幅が一緒になるように設定 */
     letter-spacing: 17.4px;
     /* animationの使用を一気に設定 */
+    /* animation: animationName duration timingFunction delay */
     animation: moveInRight 1s ease-out;
 }
 
@@ -125,6 +126,18 @@ body {
     }
 }
 
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* : 疑似クラス、pseudo class */
 .btn:link,
 .btn:visited {
     text-transform: uppercase;
@@ -134,6 +147,7 @@ body {
     border-radius: 100px;
     /* 全animationの変遷をゆっくりさせる */
     transition: all .2s;
+    position: relative;
 }
 
 .btn:hover {
@@ -153,4 +167,43 @@ body {
 .btn-white {
     background-color: #fff;
     color: #777;
+}
+
+/* .btn::after(変化前), .btn:hover::after(変化後)でやっていることの意味
+.btn::afterで.btnと同じ大きさのから要素をz-index -1で後ろに隠し、.btn:hover::afterで状態を変化させる */
+
+/* :: 疑似要素、pseudo element */
+/* 変化前の.btn::after */
+.btn::after {
+    content: "";
+    display: inline-block;
+    /* 疑似要素は.btnの直下、つまり子要素として挿入されるのでheight, widthの100%指定で.btnと同等のheight, widthを持つこととなる */
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* 全property、ここでは下の.btn:hover::afterで指定したtransfor scaleとopacityの値を変化させる */
+    transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: white;
+}
+
+/* 変化後の.btn::after、.btn::after:hoverは動かないので注意 */
+/* hover時に上の.btn::afterが、opacity 0 -> 1, scale 大 -> ノーマルに変化、つまり徐々に見えながら元の大きさに戻る */
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+/* 読み込み時下からpopup */
+.btn-animated {
+    animation: moveInBottom .5s ease-out 0.75s;
+    /* moveInBottomはdelayが指定してあるので、animationが起こっていない時にそのまま表示されてしまう。これをなくすためにanomation-fill-modeを指定 */
+    /* animationが起こっていない時の状態、つまりanimationが起こる前と終わった後の状態を指定する。 forwardsでkeyframe 0%、backwardsでkeyframe 100%のstyleを適用する*/
+    animation-fill-mode: backwards;
 }
