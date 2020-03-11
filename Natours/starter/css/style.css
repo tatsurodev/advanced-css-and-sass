@@ -7,20 +7,33 @@ Dark green: #28b485
 
 */
 
-* {
+/* 擬似クラスも使用しているのでuniversal resetでも一応指定しておくほうがbetter */
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    /* universal resetにbox-sizing: border-box;を使用すると例外的に違うbox-sizingを使用したい時に潰しが効かないのでbox-sizing: inherit;として、使用したい要素でのみbox-sizing: border-boxを使用すると潰しが効く */
+    /* box-sizing: border-box; */
+}
+
+/* root element */
+html {
+    /* rootのfont-sizeをpxで指定してしまうとuserがbrowser等でfont-sizeを変更できなくなってしまうためbrowserのdefault font-sizeを引き継いで%で指定してやるとbetter */
+    font-size: 62.5%;
 }
 
 body {
     font-family: "Lato", sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    /* 元々のroot font-size */
+    /* font-size: 16px; */
     line-height: 1.7;
     color: #777;
     /* paddingは継承されない */
-    padding: 30px;
+    padding: 3rem;
+    /* universal resetではなく特定の要素でのみ使用する手法にしたほうが、例外的に違うbox-sizingを使用する時に便利 */
+    box-sizing: border-box;
 }
 
 .header {
@@ -42,17 +55,17 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
 
-.logo-box {
+.header__logo-box {
     position: absolute;
-    top: 40px;
-    left: 40px;
+    top: 4rem;
+    left: 4rem;
 }
 
-.logo {
-    height: 35px; 
+.header__logo {
+    height: 3.5rem; 
 }
 
-.text-box {
+.header__text-box {
     /* 親要素.headerにはrelative設定済 */
     /* block要素の中央揃えは親要素relative、子要素absoluteを使用 */
     position: absolute;
@@ -70,14 +83,14 @@ body {
     text-transform: uppercase;
     /* .heading-primary-main, .heading-primary-subで使用するanimationによる小さな揺れをなくすためのhack */
     backface-visibility: hidden;
-    margin-bottom: 60px;
+    margin-bottom: 6rem;
 }
 
-.heading-primary-main {
+.heading-primary--main {
     display: block;
-    font-size: 60px;
-    font-weight: 400px;
-    letter-spacing: 35px;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
     /* animationの使用にはname, durationの2つが必須 */
     animation-name: moveInLeft;
     animation-duration: 1s;
@@ -86,12 +99,12 @@ body {
     animation-iteration-count: 3; */
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
     display: block;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 700;
     /* .heading-primary-main、..heading-primary-subの文字の幅が一緒になるように設定 */
-    letter-spacing: 17.4px;
+    letter-spacing: 1.75rem;
     /* animationの使用を一気に設定 */
     /* animation: animationName duration timingFunction delay */
     animation: moveInRight 1s ease-out;
@@ -101,10 +114,10 @@ body {
 @keyframes moveInLeft {
     0% {
         opacity: 0;
-        transform: translateX(-100px);
+        transform: translateX(-10rem);
     }
     80% {
-        transform: translateX(10px);
+        transform: translateX(1rem);
     }
     100% {
         opacity: 1;
@@ -115,10 +128,10 @@ body {
 @keyframes moveInRight {
     0% {
         opacity: 0;
-        transform: translateX(100px);
+        transform: translateX(10rem);
     }
     80% {
-        transform: translateX(-10px);
+        transform: translateX(-1rem);
     }
     100% {
         opacity: 1;
@@ -129,7 +142,7 @@ body {
 @keyframes moveInBottom {
     0% {
         opacity: 0;
-        transform: translateY(100%);
+        transform: translateY(3rem);
     }
     100% {
         opacity: 1;
@@ -142,29 +155,30 @@ body {
 .btn:visited {
     text-transform: uppercase;
     text-decoration: none;
-    padding: 15px 40px;
+    padding: 1.5rem 4rem;
     display: inline-block;
-    border-radius: 100px;
+    border-radius: 10rem;
     /* 全animationの変遷をゆっくりさせる */
     transition: all .2s;
     position: relative;
+    font-size: 1.6rem;
 }
 
 .btn:hover {
     /* hover時にbuttonを浮き上がらせる */
     transform: translateY(-3px);
     /* box-shadow: x, epsilon blur rgba; */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
     /* clickされた時にhover時より沈ませる */
     transform: translateY(-1px);
     /* clickされた時にhover時よりy, blurを小さくすることでclick感が出る */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.btn--white {
     background-color: #fff;
     color: #777;
 }
@@ -180,7 +194,7 @@ body {
     /* 疑似要素は.btnの直下、つまり子要素として挿入されるのでheight, widthの100%指定で.btnと同等のheight, widthを持つこととなる */
     height: 100%;
     width: 100%;
-    border-radius: 100px;
+    border-radius: 10rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -189,7 +203,7 @@ body {
     transition: all .4s;
 }
 
-.btn-white::after {
+.btn--white::after {
     background-color: white;
 }
 
@@ -201,7 +215,7 @@ body {
 }
 
 /* 読み込み時下からpopup */
-.btn-animated {
+.btn--animated {
     animation: moveInBottom .5s ease-out 0.75s;
     /* moveInBottomはdelayが指定してあるので、animationが起こっていない時にそのまま表示されてしまう。これをなくすためにanomation-fill-modeを指定 */
     /* animationが起こっていない時の状態、つまりanimationが起こる前と終わった後の状態を指定する。 forwardsでkeyframe 0%、backwardsでkeyframe 100%のstyleを適用する*/
