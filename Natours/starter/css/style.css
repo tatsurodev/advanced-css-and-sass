@@ -1,223 +1,179 @@
-/*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-
+@charset "UTF-8";
 /* 擬似クラスも使用しているのでuniversal resetでも一応指定しておくほうがbetter */
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    /* universal resetにbox-sizing: border-box;を使用すると例外的に違うbox-sizingを使用したい時に潰しが効かないのでbox-sizing: inherit;として、使用したい要素でのみbox-sizing: border-boxを使用すると潰しが効く */
-    /* box-sizing: border-box; */
-}
+  margin: 0;
+  padding: 0;
+  /* universal resetにbox-sizing: border-box;を使用すると例外的に違うbox-sizingを使用したい時に潰しが効かないのでbox-sizing: inherit;として、使用したい要素でのみbox-sizing: border-boxを使用すると潰しが効く */
+  /* box-sizing: border-box; */ }
 
 /* root element */
 html {
-    /* rootのfont-sizeをpxで指定してしまうとuserがbrowser等でfont-sizeを変更できなくなってしまうためbrowserのdefault font-sizeを引き継いで%で指定してやるとbetter */
-    font-size: 62.5%;
-}
+  /* rootのfont-sizeをpxで指定してしまうとuserがbrowser等でfont-sizeを変更できなくなってしまうためbrowserのdefault font-sizeを引き継いで%で指定してやるとbetter */
+  font-size: 62.5%; }
 
 body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    /* 元々のroot font-size */
-    /* font-size: 16px; */
-    line-height: 1.7;
-    color: #777;
-    /* paddingは継承されない */
-    padding: 3rem;
-    /* universal resetではなく特定の要素でのみ使用する手法にしたほうが、例外的に違うbox-sizingを使用する時に便利 */
-    box-sizing: border-box;
-}
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* 元々のroot font-size */
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  /* paddingは継承されない */
+  padding: 3rem;
+  /* universal resetではなく特定の要素でのみ使用する手法にしたほうが、例外的に違うbox-sizingを使用する時に便利 */
+  box-sizing: border-box; }
 
 .header {
-    /* vw, vhはviewportに対しての% */
-    height: 95vh;
-    /* 背景を複数指定 */
-    background-image:
-        linear-gradient(
-            to right bottom,
-            rgba(126, 213, 111, 0.8),
-            rgba(40,180,131,0.8)
-        ),
-        url(../img/hero.jpg);
-    background-size: cover;
-    /* 基準となる固定する場所を指定 */
-    background-position: top;
-    position: relative;
-    /* 切り抜く */
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
+  /* vw, vhはviewportに対しての% */
+  height: 95vh;
+  /* 背景を複数指定 */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  /* 基準となる固定する場所を指定 */
+  background-position: top;
+  position: relative;
+  /* 切り抜く */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
 
 .header__logo-box {
-    position: absolute;
-    top: 4rem;
-    left: 4rem;
-}
+  position: absolute;
+  top: 4rem;
+  left: 4rem; }
 
 .header__logo {
-    height: 3.5rem; 
-}
+  height: 3.5rem; }
 
 .header__text-box {
-    /* 親要素.headerにはrelative設定済 */
-    /* block要素の中央揃えは親要素relative、子要素absoluteを使用 */
-    position: absolute;
-    /* 親要素に対しての% */
-    top: 40%;
-    left: 50%;
-    /* transformで使う%は要素自身に対する% */
-    transform: translate(-50%, -50%);
-    /* inline要素の中央揃えにはtext-align: center;を使用 */
-    text-align: center;
-}
+  /* 親要素.headerにはrelative設定済 */
+  /* block要素の中央揃えは親要素relative、子要素absoluteを使用 */
+  position: absolute;
+  /* 親要素に対しての% */
+  top: 40%;
+  left: 50%;
+  /* transformで使う%は要素自身に対する% */
+  transform: translate(-50%, -50%);
+  /* inline要素の中央揃えにはtext-align: center;を使用 */
+  text-align: center; }
 
 .heading-primary {
-    color: #fff;
-    text-transform: uppercase;
-    /* .heading-primary-main, .heading-primary-subで使用するanimationによる小さな揺れをなくすためのhack */
-    backface-visibility: hidden;
-    margin-bottom: 6rem;
-}
+  color: #fff;
+  text-transform: uppercase;
+  /* .heading-primary-main, .heading-primary-subで使用するanimationによる小さな揺れをなくすためのhack */
+  backface-visibility: hidden;
+  margin-bottom: 6rem; }
 
 .heading-primary--main {
-    display: block;
-    font-size: 6rem;
-    font-weight: 400;
-    letter-spacing: 3.5rem;
-    /* animationの使用にはname, durationの2つが必須 */
-    animation-name: moveInLeft;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-    /* animation-delay: 3s;
-    animation-iteration-count: 3; */
-}
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  /* animationの使用にはname, durationの2つが必須 */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  /* animation-delay: 3s;
+    animation-iteration-count: 3; */ }
 
 .heading-primary--sub {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    /* .heading-primary-main、..heading-primary-subの文字の幅が一緒になるように設定 */
-    letter-spacing: 1.75rem;
-    /* animationの使用を一気に設定 */
-    /* animation: animationName duration timingFunction delay */
-    animation: moveInRight 1s ease-out;
-}
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  /* .heading-primary-main、..heading-primary-subの文字の幅が一緒になるように設定 */
+  letter-spacing: 1.75rem;
+  /* animationの使用を一気に設定 */
+  /* animation: animationName duration timingFunction delay */
+  animation: moveInRight 1s ease-out; }
 
 /* animationの定義 */
 @keyframes moveInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-10rem);
-    }
-    80% {
-        transform: translateX(1rem);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
 
 @keyframes moveInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(10rem);
-    }
-    80% {
-        transform: translateX(-1rem);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
 
 @keyframes moveInBottom {
-    0% {
-        opacity: 0;
-        transform: translateY(3rem);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
 
 /* : 疑似クラス、pseudo class */
 .btn:link,
 .btn:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.5rem 4rem;
-    display: inline-block;
-    border-radius: 10rem;
-    /* 全animationの変遷をゆっくりさせる */
-    transition: all .2s;
-    position: relative;
-    font-size: 1.6rem;
-}
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  /* 全animationの変遷をゆっくりさせる */
+  transition: all .2s;
+  position: relative;
+  font-size: 1.6rem; }
 
 .btn:hover {
-    /* hover時にbuttonを浮き上がらせる */
-    transform: translateY(-3px);
-    /* box-shadow: x, epsilon blur rgba; */
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
+  /* hover時にbuttonを浮き上がらせる */
+  transform: translateY(-3px);
+  /* box-shadow: x, epsilon blur rgba; */
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
 
 .btn:active {
-    /* clickされた時にhover時より沈ませる */
-    transform: translateY(-1px);
-    /* clickされた時にhover時よりy, blurを小さくすることでclick感が出る */
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
-}
+  /* clickされた時にhover時より沈ませる */
+  transform: translateY(-1px);
+  /* clickされた時にhover時よりy, blurを小さくすることでclick感が出る */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
 
 .btn--white {
-    background-color: #fff;
-    color: #777;
-}
+  background-color: #fff;
+  color: #777; }
 
 /* .btn::after(変化前), .btn:hover::after(変化後)でやっていることの意味
 .btn::afterで.btnと同じ大きさのから要素をz-index -1で後ろに隠し、.btn:hover::afterで状態を変化させる */
-
 /* :: 疑似要素、pseudo element */
 /* 変化前の.btn::after */
 .btn::after {
-    content: "";
-    display: inline-block;
-    /* 疑似要素は.btnの直下、つまり子要素として挿入されるのでheight, widthの100%指定で.btnと同等のheight, widthを持つこととなる */
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    /* 全property、ここでは下の.btn:hover::afterで指定したtransfor scaleとopacityの値を変化させる */
-    transition: all .4s;
-}
+  content: "";
+  display: inline-block;
+  /* 疑似要素は.btnの直下、つまり子要素として挿入されるのでheight, widthの100%指定で.btnと同等のheight, widthを持つこととなる */
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* 全property、ここでは下の.btn:hover::afterで指定したtransfor scaleとopacityの値を変化させる */
+  transition: all .4s; }
 
 .btn--white::after {
-    background-color: white;
-}
+  background-color: white; }
 
 /* 変化後の.btn::after、.btn::after:hoverは動かないので注意 */
 /* hover時に上の.btn::afterが、opacity 0 -> 1, scale 大 -> ノーマルに変化、つまり徐々に見えながら元の大きさに戻る */
 .btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
-}
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0; }
 
 /* 読み込み時下からpopup */
 .btn--animated {
-    animation: moveInBottom .5s ease-out 0.75s;
-    /* moveInBottomはdelayが指定してあるので、animationが起こっていない時にそのまま表示されてしまう。これをなくすためにanomation-fill-modeを指定 */
-    /* animationが起こっていない時の状態、つまりanimationが起こる前と終わった後の状態を指定する。 forwardsでkeyframe 0%、backwardsでkeyframe 100%のstyleを適用する*/
-    animation-fill-mode: backwards;
-}
+  animation: moveInBottom .5s ease-out 0.75s;
+  /* moveInBottomはdelayが指定してあるので、animationが起こっていない時にそのまま表示されてしまう。これをなくすためにanomation-fill-modeを指定 */
+  /* animationが起こっていない時の状態、つまりanimationが起こる前と終わった後の状態を指定する。 forwardsでkeyframe 0%、backwardsでkeyframe 100%のstyleを適用する*/
+  animation-fill-mode: backwards; }
