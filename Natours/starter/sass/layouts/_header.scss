@@ -1,0 +1,42 @@
+.header {
+    /* vw, vhはviewportに対しての% */
+    height: 95vh;
+    /* 背景を複数指定 */
+    background-image:
+        linear-gradient(
+            to right bottom,
+            /* cssではrgba関数にrgba値を指定する必要があるが、sassでは16進数hexadecimal valueで指定してもおｋ */
+            rgba($color-primary-light, 0.8),
+            rgba($color-primary-dark,0.8)
+        ),
+        url(../img/hero.jpg);
+    background-size: cover;
+    /* 基準となる固定する場所を指定 */
+    background-position: top;
+    position: relative;
+    /* 切り抜く */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+
+    &__logo {
+        height: 3.5rem; 
+    }
+
+    &__text-box {
+        /* 親要素.headerにはrelative設定済 */
+        /* block要素の中央揃えは親要素relative、子要素absoluteを使用 */
+        position: absolute;
+        /* 親要素に対しての% */
+        top: 40%;
+        left: 50%;
+        /* transformで使う%は要素自身に対する% */
+        transform: translate(-50%, -50%);
+        /* inline要素の中央揃えにはtext-align: center;を使用 */
+        text-align: center;
+    }
+}
