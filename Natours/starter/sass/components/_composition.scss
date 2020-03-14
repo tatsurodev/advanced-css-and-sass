@@ -1,0 +1,42 @@
+.composition {
+    position: relative;
+
+    &__photo {
+        width: 55%;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        position: absolute;
+        z-index: 10;
+        transition: all .2s;
+        outline-offset: 2rem;
+
+        &--p1 {
+            left: 0;
+            top: -2rem;
+        }
+
+        &--p2 {
+            right: 0;
+            top: 2rem;
+        }
+
+        &--p3 {
+            left: 0;
+            top: 10rem;
+        }
+
+        &:hover {
+            /* borderはlayoutに影響が出るので、影響の出ないoutlineを使う */
+            outline: 1.5rem solid $color-primary;
+            transform: scale(1.05) translateY(-.5rem);
+            /* 影をy方向に長くしてぼかしを大きく色を濃く */
+            box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+            /* 一番手前に表示 */
+            z-index: 20;
+        }
+    }
+
+    /* ある写真にhover時に(&:hover), それ以外の写真のscaleを小さくする。&:hoverがないと最初の読み込んだ段階で全写真にstyleが適用されてしまうので注意 */
+    &:hover &__photo:not(:hover) {
+        transform: scale(.95);
+    }
+}
