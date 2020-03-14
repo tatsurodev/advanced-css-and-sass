@@ -1,6 +1,6 @@
 .row {
     max-width: $grid-width;
-    background-color: #eee;
+    // background-color: #eee;
     margin: 0 auto;
 
     // 一番最後のrow以外にmargin-bottom設定
@@ -13,7 +13,7 @@
 
     // ^="startWith", $="endWith", *="contain", ="完全一致"
     [class*="col-"] {
-        background-color: orangered;
+        // background-color: orangered;
         float: left;
         &:not(:last-child) {
             margin-right: $gutter-horizontal;
