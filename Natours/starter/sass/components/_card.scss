@@ -1,0 +1,51 @@
+.card {
+    $height-of-card__side: 50rem;
+    /* 子要素をrotateさせた時に遠近感を出す */
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    /* 子要素全てがposition: absolute;の場合、floatと同様高さがなくなってしまうので親要素に子要素と同じ高さを効かせる */
+    height: $height-of-card__side;
+
+    &__side {
+        color: #fff;
+        font-size: 2rem;
+        height: $height-of-card__side;
+        transition: all .8s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:100%;
+        /* transform rotateさせた時に裏を表示するかしないかのproperty */
+        backface-visibility: hidden;
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+        &--front {
+            /* Frontの初期状態はrotateY(0)でhover時にrotateY(180deg) */
+            background-color: $color-white;
+        }
+
+        &--back {
+            /* Backの初期状態はrotateY(180deg)でhover時にrotateY(0) */
+            transform: rotateY(180deg);
+
+            &-1 {
+                background-image: linear-gradient(
+                    to right bottom,
+                    $color-secondary-light,
+                    $color-secondary-dark
+                );
+            }
+        }
+    }
+
+    /* rotateをより立体的に見せる為に親要素にperspectiveを設定 */
+    &:hover &__side--front {
+        transform: rotateY(-180deg);
+    }
+
+    &:hover &__side--back {
+        transform: rotateY(0);
+    }
+}
