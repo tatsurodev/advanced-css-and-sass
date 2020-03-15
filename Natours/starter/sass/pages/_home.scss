@@ -3,3 +3,23 @@
     padding: 25rem 0;
     margin-top: -20vh;
 }
+
+.section-features {
+    padding: 20rem 0;
+    background-image: 
+        linear-gradient(
+            to right bottom,
+            rgba($color-primary-light, 0.8),
+            rgba($color-primary-dark, 0.8)),
+        url(../img/nat-4.jpg);
+    background-size: cover;
+    /* 全体を傾けて下記のselectorで直下の子要素のみに逆の傾きを付けて元に戻す */
+    transform: skewY(-7deg);
+    // 背景のみくり抜く場合
+    // clip-path: polygon(0 20%, 80% 0, 100% 0, 100% 80%, 20% 100%, 0 100%);
+    margin-top: -10rem;
+
+    & > * {
+        transform: skewY(7deg);
+    }
+}
