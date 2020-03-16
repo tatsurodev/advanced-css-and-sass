@@ -42,6 +42,15 @@
             background-color: white;
         }
     }
+    
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+
+            &::after {
+            background-color: $color-primary;
+        }
+    }
 
     /* .btn::after(変化前), .btn:hover::after(変化後)でやっていることの意味
     &::afterで.btnと同じ大きさのから要素をz-index -1で後ろに隠し、.btn:hover::afterで状態を変化させる */
