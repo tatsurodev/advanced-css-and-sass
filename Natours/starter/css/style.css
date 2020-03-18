@@ -367,11 +367,12 @@ body {
   padding-left: 9rem;
   font-size: 1.6rem;
   /* 全体をskewさせて直後の子要素で逆の角度にskewさせて元に戻す */
-  transform: skewX(-12deg); }
+  transform: skewX(-12deg);
+  /* .story:hover時にcaptionが下からpopupし、背景がボケて暗くなってzoom outするanimationを写真部分に追加 */
+  /* .story__imgがanimation中に画像の外に細い線が入るので親要素の.story__shapeにoverflow: hiddenをつける */ }
   .story__shape {
     width: 15rem;
     height: 15rem;
-    background-color: orangered;
     float: left;
     /* 周りの要素がどのようにfloatするかその形状を定義 */
     shape-outside: circle(50% at 50% 50%);
@@ -379,11 +380,38 @@ body {
     /* 要素自体がどのように見えるようにするか定義 */
     clip-path: circle(50% at 50% 50%);
     -webkit-clip-path: circle(50% at 50% 50%);
-    transform: translateX(-3rem) skewX(12deg); }
+    transform: translateX(-3rem) skewX(12deg);
+    /* .story__captionのposition用 */
+    position: relative;
+    /* .story:hover .story__imgのanimation用 */
+    overflow: hidden; }
   .story__img {
-    height: 100%; }
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all .5s; }
   .story__text {
     transform: skewX(12deg); }
+  .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* translate(-50%, -50%)からyの値を大きくしopacity0にして、.story:hover時に下から浮かび上がるようなanimationにする */
+    transform: translate(-50%, 20%);
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all .5s;
+    /* animation時の小さな揺れをfix */
+    backface-visibility: hidden; }
+  .story:hover .story__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%); }
+  .story:hover .story__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%); }
 
 .row {
   max-width: 114rem;
