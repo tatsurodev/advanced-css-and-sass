@@ -128,6 +128,23 @@ body {
 .u-margin-top-huge {
   margin-top: 10rem; }
 
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* height, width共に100%で親要素の.section-storiesと同じ大きさにする */
+  height: 100%;
+  width: 100%;
+  /* 背景に持ってくる */
+  z-index: -1;
+  opacity: .15; }
+  .bg-video__content {
+    /* video要素はinline要素でも置換要素なのでheight, widthが指定でき、親要素の大きさからはみ出ることがあるのでheigth, widthを100%で親と同じにする*/
+    height: 100%;
+    width: 100%;
+    /* object-fit propertyは置換要素(img, video, input, iframe)に対して指定をする */
+    object-fit: cover; }
+
 /* : 疑似クラス、pseudo class */
 .btn {
   /* .btn::after(変化前), .btn:hover::after(変化後)でやっていることの意味
@@ -361,7 +378,7 @@ body {
   width: 75%;
   margin: 0 auto;
   box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 3px;
   padding: 6rem;
   padding-left: 9rem;
@@ -490,5 +507,6 @@ body {
   margin-top: -10rem; }
 
 .section-stories {
-  padding: 15rem 0;
-  background-color: #f7f7f7; }
+  /* .bg-video用 */
+  position: relative;
+  padding: 15rem 0; }
