@@ -35,3 +35,41 @@
     position: relative;
     padding: 15rem 0;
 }
+
+.section-book {
+    padding: 15rem 0;
+    background-image: linear-gradient(
+        to right bottom,
+        $color-primary-light,
+        $color-primary-dark
+    );
+}
+
+.book {
+    background-image:
+        /* 1枚目、上の画像 */
+        linear-gradient(
+            /* 変化の向きを角度でも表せる */
+            /* ↑0deg, →90deg, ↓180deg, 左270deg */
+            105deg,
+            /* 0%時つまり最初のcolor */
+            rgba($color-white, .9) 0%,
+            /* 50%時のcolor、つまり0-50%の間に↑のcolorから↓のcolorに変化 */
+            rgba($color-white, .9) 50%,
+            /* 50%-50%の間、つまり50%の境界で↑のcolorと↓のcolorへの変化がくっきり起こる */
+            transparent 50%
+        ),
+        /* 2枚目、下の画像 */
+        url(../img/nat-10.jpg)
+    ;
+    /* 100%はcoverと同じ */
+    background-size: 100%;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    height: 50rem;
+
+    &__form {
+        width: 50%;
+        padding: 6rem;
+    }
+}
