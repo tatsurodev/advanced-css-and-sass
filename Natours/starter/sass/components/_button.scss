@@ -1,5 +1,7 @@
 /* : 疑似クラス、pseudo class */
 .btn {
+    &,
+    /* link, visitedはanchorにしか効かない、button等の本来効かない要素には効かせたい場合、上の&のように全.btn classがつく要素を指定してやるとよい */
     &:link,
     &:visited {
         text-transform: uppercase;
@@ -11,6 +13,8 @@
         transition: all .2s;
         position: relative;
         font-size: $default-font-size;
+        border: none;
+        cursor: pointer;
     }
 
     &:hover {
@@ -27,7 +31,10 @@
         }
     }
 
-    &:active {
+    /* activeはクリックしてから離すまで、focusはtab keyなどで移動した時など */
+    &:active,
+    &:focus {
+        outline: none;
         /* clickされた時にhover時より沈ませる */
         transform: translateY(-1px);
         /* clickされた時にhover時よりy, blurを小さくすることでclick感が出る */
