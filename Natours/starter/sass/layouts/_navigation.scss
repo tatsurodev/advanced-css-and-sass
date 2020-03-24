@@ -12,6 +12,7 @@
         right: 6rem;
         border-radius: 50%;
         z-index: 2000;
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
     }
 
     /* 上の.navigation__button click時に全体に広がるようにをscaleさせる。初期状態ではbuttonの下に重なるように円形で配置 */
@@ -28,17 +29,22 @@
             $color-primary-dark
         );
         z-index: 1000;
-        transform: scale(80);
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
     }
 
     /* viewport全体に広がり固定される要素 */
     &__nav {
         height: 100vh;
-        width: 100%;
         position: fixed;
         top: 0;
         left: 0;
         z-index: 1500;
+
+        // background-color: orangered;
+        opacity: 0;
+        /* nav非表示時はwidth 0、表示時に100%になりanimationする */
+        width: 0;
+        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     /* 真ん中に配置 */
@@ -49,6 +55,7 @@
         transform: translate(-50%, -50%);
         list-style: none;
         text-align: center;
+        width: 100%;
     }
 
     &__item {
@@ -88,5 +95,15 @@
             color: $color-primary;
             transform: translateX(1rem);
         }
+    }
+
+    /* checkbox hackでlabelの選択でchecked状態になり、sibling selectorのbackgroundとnavを変化させる */
+    &__checkbox:checked ~ &__background {
+        transform: scale(80);
+    }
+
+    &__checkbox:checked ~ &__nav {
+        opacity: 1;
+        width: 100%;
     }
 }

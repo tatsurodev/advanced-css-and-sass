@@ -608,7 +608,8 @@ body {
 .navigation {
   /* 上の.navigation__button click時に全体に広がるようにをscaleさせる。初期状態ではbuttonの下に重なるように円形で配置 */
   /* viewport全体に広がり固定される要素 */
-  /* 真ん中に配置 */ }
+  /* 真ん中に配置 */
+  /* checkbox hackでlabelの選択でchecked状態になり、sibling selectorのbackgroundとnavを変化させる */ }
   .navigation__checkbox {
     display: none; }
   .navigation__button {
@@ -619,7 +620,8 @@ body {
     top: 6rem;
     right: 6rem;
     border-radius: 50%;
-    z-index: 2000; }
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1); }
   .navigation__background {
     height: 6rem;
     width: 6rem;
@@ -630,21 +632,25 @@ body {
     /* 円形のgradiation、内から外 */
     background-image: radial-gradient(#7ed56f, #28b485);
     z-index: 1000;
-    transform: scale(80); }
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
   .navigation__nav {
     height: 100vh;
-    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1500; }
+    z-index: 1500;
+    opacity: 0;
+    /* nav非表示時はwidth 0、表示時に100%になりanimationする */
+    width: 0;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
   .navigation__list {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     list-style: none;
-    text-align: center; }
+    text-align: center;
+    width: 100%; }
   .navigation__item {
     margin: 1rem; }
   .navigation__link:link, .navigation__link:visited {
@@ -667,6 +673,11 @@ body {
     background-position: 100%;
     color: #55c57a;
     transform: translateX(1rem); }
+  .navigation__checkbox:checked ~ .navigation__background {
+    transform: scale(80); }
+  .navigation__checkbox:checked ~ .navigation__nav {
+    opacity: 1;
+    width: 100%; }
 
 .section-about {
   background-color: #f7f7f7;
