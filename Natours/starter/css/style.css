@@ -609,7 +609,9 @@ body {
   /* 上の.navigation__button click時に全体に広がるようにをscaleさせる。初期状態ではbuttonの下に重なるように円形で配置 */
   /* viewport全体に広がり固定される要素 */
   /* 真ん中に配置 */
-  /* checkbox hackでlabelの選択でchecked状態になり、sibling selectorのbackgroundとnavを変化させる */ }
+  /* checkbox hackでlabelの選択でchecked状態になり、sibling selectorのbackgroundとnavを変化させる */
+  /* 上下の横線をずらす */
+  /* 真ん中の横線を無くして上下の横線を回転 */ }
   .navigation__checkbox {
     display: none; }
   .navigation__button {
@@ -621,7 +623,9 @@ body {
     right: 6rem;
     border-radius: 50%;
     z-index: 2000;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1); }
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer; }
   .navigation__background {
     height: 6rem;
     width: 6rem;
@@ -678,6 +682,36 @@ body {
   .navigation__checkbox:checked ~ .navigation__nav {
     opacity: 1;
     width: 100%; }
+  .navigation__icon {
+    position: relative;
+    margin-top: 3.5rem;
+    /* 横線を背景に色を付けることで表す */ }
+    .navigation__icon, .navigation__icon::before, .navigation__icon::after {
+      width: 3rem;
+      height: 2px;
+      background-color: #333;
+      display: inline-block; }
+    .navigation__icon::before, .navigation__icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s; }
+    .navigation__icon::before {
+      top: -.8rem; }
+    .navigation__icon::after {
+      top: .8rem; }
+  .navigation__button:hover .navigation__icon::before {
+    top: -1rem; }
+  .navigation__button:hover .navigation__icon::after {
+    top: 1rem; }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon {
+    background-color: transparent; }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::before {
+    top: 0;
+    transform: rotate(135deg); }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::after {
+    top: 0;
+    transform: rotate(-135deg); }
 
 .section-about {
   background-color: #f7f7f7;
