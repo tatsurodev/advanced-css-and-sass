@@ -1,0 +1,114 @@
+/* : 疑似クラス、pseudo class */
+.btn {
+    &,
+    /* link, visitedはanchorにしか効かない、button等の本来効かない要素には効かせたい場合、上の&のように全.btn classがつく要素を指定してやるとよい */
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;
+        border-radius: 10rem;
+        /* 全animationの変遷をゆっくりさせる */
+        transition: all .2s;
+        position: relative;
+        font-size: $default-font-size;
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover {
+        /* hover時にbuttonを浮き上がらせる */
+        transform: translateY(-3px);
+        /* box-shadow: x, epsilon blur rgba; */
+        box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+        /* 変化後の.btn::after、.btn::after:hoverは動かないので注意 */
+        /* hover時に上の.btn::afterが、opacity 0 -> 1, scale 大 -> ノーマルに変化、つまり徐々に見えながら元の大きさに戻る */
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    /* activeはクリックしてから離すまで、focusはtab keyなどで移動した時など */
+    &:active,
+    &:focus {
+        outline: none;
+        /* clickされた時にhover時より沈ませる */
+        transform: translateY(-1px);
+        /* clickされた時にhover時よりy, blurを小さくすることでclick感が出る */
+        box-shadow: 0 .5rem 1rem rgba($color-black, 0.2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+            &::after {
+            background-color: white;
+        }
+    }
+    
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+
+            &::after {
+            background-color: $color-primary;
+        }
+    }
+
+    /* .btn::after(変化前), .btn:hover::after(変化後)でやっていることの意味
+    &::afterで.btnと同じ大きさのから要素をz-index -1で後ろに隠し、.btn:hover::afterで状態を変化させる */
+
+    /* :: 疑似要素、pseudo element */
+    /* 変化前の.btn::after */
+    &::after {
+        content: "";
+        display: inline-block;
+        /* 疑似要素は.btnの直下、つまり子要素として挿入されるのでheight, widthの100%指定で.btnと同等のheight, widthを持つこととなる */
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        /* 全property、ここでは下の.btn:hover::afterで指定したtransfor scaleとopacityの値を変化させる */
+        transition: all .4s;
+    }
+
+    /* 読み込み時下からpopup */
+    &--animated {
+        animation: moveInBottom .5s ease-out 0.75s;
+        /* moveInBottomはdelayが指定してあるので、animationが起こっていない時にそのまま表示されてしまう。これをなくすためにanomation-fill-modeを指定 */
+        /* animationが起こっていない時の状態、つまりanimationが起こる前と終わった後の状態を指定する。 forwardsでkeyframe 0%、backwardsでkeyframe 100%のstyleを適用する*/
+        animation-fill-mode: backwards;
+    }
+}
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 2rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}

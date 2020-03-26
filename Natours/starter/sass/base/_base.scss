@@ -1,0 +1,22 @@
+// universal reset, html, body styling
+/* 擬似クラスも使用しているのでuniversal resetでも一応指定しておくほうがbetter */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* universal resetにbox-sizing: border-box;を使用すると例外的に違うbox-sizingを使用したい時に潰しが効かない。box-sizingは本来継承されないpropertyだが、全要素でbox-sizing: inherit;として、使用したい要素でのみbox-sizing: border-boxを使用すると潰しが効く */
+    box-sizing: inherit; 
+}
+
+/* root element */
+html {
+    /* rootのfont-sizeをpxで指定してしまうとuserがbrowser等でfont-sizeを変更できなくなってしまうためbrowserのdefault font-sizeを引き継いで%で指定してやるとbetter */
+    // この項目はtypographyに分類されそうだが、全sizeに影響を与えるよりglobalな値のためbaseに記述するほうがより直感的
+    font-size: 62.5%;
+}
+
+body {
+    /* universal resetではなく特定の要素でのみ使用する手法にしたほうが、例外的に違うbox-sizingを使用する時に便利 */
+    box-sizing: border-box;
+}

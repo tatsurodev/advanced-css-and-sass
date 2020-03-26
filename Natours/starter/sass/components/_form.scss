@@ -1,0 +1,101 @@
+.form {
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-size: 1.5rem;
+        /* inputのfont系propertyはbrowserのdefault fontが使用されるため、inheritでpageのfontと合わせる */
+        font-family: inherit;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .3s;
+
+        &:focus {
+            /* outline:none;でfocus時の青枠をなくし代わりに影とborder-bottomを追加 */
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black, .1);
+            /* border-bottomで3px分focus時に下にlayoutがずれるので.form__inputに同じ太さの透明の下線を追加 */
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid {
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        /* placeholderのstyling */
+        &::-webkit-input-placeholder {
+            color: $color-grey-dark-2;
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+    }
+
+    /* placeholder-shownの疑似要素は、プレースホルダー表示中のinput, textareaを指す、入力後placeholderが表示されなくなるとstyleが当たらなくなる。下記は、placeholderが表示中の時のlabelのstyleを指定している */
+    &__input:placeholder-shown + &__label {
+        opacity: 0;
+        /* opacity: 0;だけだとリンクやクリックイベントなどが発生するのでvisibility: hidden;で一応それもなくす */
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+    /* input type radioはstylingできないので元のradio buttonはhiddenし、buttonに見えるものをspanで用意する */
+    &__radio-group {
+        width: 49%;
+        display: inline-block;
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+    }
+
+    &__radio-button {
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+
+        &::after {
+            content: "";
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: $color-primary;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+}

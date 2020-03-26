@@ -1,0 +1,19 @@
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* height, width共に100%で親要素の.section-storiesと同じ大きさにする */
+    height: 100%;
+    width: 100%;
+    /* 背景に持ってくる */
+    z-index: -1;
+    opacity: .15;
+    
+    &__content {
+       /* video要素はinline要素でも置換要素なのでheight, widthが指定でき、親要素の大きさからはみ出ることがあるのでheigth, widthを100%で親と同じにする*/
+        height: 100%;
+        width: 100%;
+        /* object-fit propertyは置換要素(img, video, input, iframe)に対して指定をする */
+        object-fit: cover;
+    }
+}

@@ -1,0 +1,75 @@
+.section-about {
+    background-color: $color-grey-light-1;
+    padding: 25rem 0;
+    margin-top: -20vh;
+}
+
+.section-features {
+    padding: 20rem 0;
+    background-image: 
+        linear-gradient(
+            to right bottom,
+            rgba($color-primary-light, 0.8),
+            rgba($color-primary-dark, 0.8)),
+        url(../img/nat-4.jpg);
+    background-size: cover;
+    /* 全体を傾けて下記のselectorで直下の子要素のみに逆の傾きを付けて元に戻す */
+    transform: skewY(-7deg);
+    // 背景のみくり抜く場合
+    // clip-path: polygon(0 20%, 80% 0, 100% 0, 100% 80%, 20% 100%, 0 100%);
+    margin-top: -10rem;
+
+    & > * {
+        transform: skewY(7deg);
+    }
+}
+
+.section-tours {
+    background-color: $color-grey-light-1;
+    padding: 25rem 0 15rem 0;
+    margin-top: -10rem;
+}
+
+.section-stories {
+    /* .bg-video用 */
+    position: relative;
+    padding: 15rem 0;
+}
+
+.section-book {
+    padding: 15rem 0;
+    background-image: linear-gradient(
+        to right bottom,
+        $color-primary-light,
+        $color-primary-dark
+    );
+}
+
+.book {
+    background-image:
+        /* 1枚目、上の画像 */
+        linear-gradient(
+            /* 変化の向きを角度でも表せる */
+            /* ↑0deg, →90deg, ↓180deg, 左270deg */
+            105deg,
+            /* 0%時つまり最初のcolor */
+            rgba($color-white, .9) 0%,
+            /* 50%時のcolor、つまり0-50%の間に↑のcolorから↓のcolorに変化 */
+            rgba($color-white, .9) 50%,
+            /* 50%-50%の間、つまり50%の境界で↑のcolorと↓のcolorへの変化がくっきり起こる */
+            transparent 50%
+        ),
+        /* 2枚目、下の画像 */
+        url(../img/nat-10.jpg)
+    ;
+    /* 100%はcoverと同じ */
+    background-size: 100%;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    height: 50rem;
+
+    &__form {
+        width: 50%;
+        padding: 6rem;
+    }
+}

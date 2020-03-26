@@ -1,0 +1,76 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    /* 全体をskewさせて直後の子要素で逆の角度にskewさせて元に戻す */
+    transform: skewX(-12deg);
+
+    // 下記のcodeでは.story__shapeにはtransform propertyがあるのでそちらが優先されてしまい効かない。.storyのよって子要素である、.story__shapeと.story__textの両方にskewXを追加する
+    // & > * {
+    //     transform: skewX(12deg);
+    // }
+
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        /* 周りの要素がどのようにfloatするかその形状を定義 */
+        shape-outside: circle(50% at 50% 50%);
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        /* 要素自体がどのように見えるようにするか定義 */
+        clip-path: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        transform: translateX(-3rem) skewX(12deg);
+        /* .story__captionのposition用 */
+        position: relative;
+        /* .story:hover .story__imgのanimation用 */
+        overflow: hidden;
+    }
+
+    /* .story:hover時にcaptionが下からpopupし、背景がボケて暗くなってzoom outするanimationを写真部分に追加 */
+
+    &__img {
+        height: 100%;
+        // 被写体が中心に来るように微調整
+        transform: translateX(-4rem) scale(1.4);
+        backface-visibility: hidden;
+        transition: all .5s;
+    }
+
+    &__text {
+        transform: skewX(12deg);
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* translate(-50%, -50%)からyの値を大きくしopacity0にして、.story:hover時に下から浮かび上がるようなanimationにする */
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        /* animation時の小さな揺れをfix */
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    /* .story__imgがanimation中に画像の外に細い線が入るので親要素の.story__shapeにoverflow: hiddenをつける */
+    &:hover &__img {
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+
+}
